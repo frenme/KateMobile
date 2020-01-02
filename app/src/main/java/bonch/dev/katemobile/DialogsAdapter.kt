@@ -15,7 +15,7 @@ class DialogsAdapter(private val list: ArrayList<DialogsModel>, val context: Con
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemPostHolder {
         return ItemPostHolder(
             LayoutInflater.from(context)
-                .inflate(R.layout.review_item, parent, false)
+                .inflate(R.layout.dialog_item, parent, false)
         )
     }
 
@@ -29,12 +29,13 @@ class DialogsAdapter(private val list: ArrayList<DialogsModel>, val context: Con
     }
 
     class ItemPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nameReviewer = itemView.findViewById<TextView>(R.id.name_reviewer)
-        private val textReview = itemView.findViewById<TextView>(R.id.text_review)
-        //private val imgReviewer =
+        private val nameDialog = itemView.findViewById<TextView>(R.id.name_dialog)
+        private val textMessage = itemView.findViewById<TextView>(R.id.text_messages)
+        private val date = itemView.findViewById<TextView>(R.id.date)
         fun bind(post: DialogsModel) {
-            nameReviewer.text = post.nameReviewer
-            textReview.text = post.textContent
+            nameDialog.text = post.nameDialog
+            textMessage.text = post.textMessage
+            date.text = post.date
         }
     }
 

@@ -1,7 +1,7 @@
 package bonch.dev.katemobile
 
 data class DialogsModel(
-    var nameReviewer: String = "",
-    var textContent: String = ""
-    //var img
+    var nameDialog: String = "",
+    var textMessage: String = "",
+    var date: String = ""
 )
