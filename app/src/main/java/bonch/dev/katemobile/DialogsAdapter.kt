@@ -50,7 +50,6 @@ class DialogsAdapter(val list: ArrayList<DialogsModel>, val activity: MainActivi
 
     }
 
-
 }
 
 
