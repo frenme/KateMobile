@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 
 
-class DialogsAdapter(private val list: ArrayList<DialogsModel>, val context: Context) :
-    RecyclerView.Adapter<DialogsAdapter.ItemPostHolder>() {
+class DialogsAdapter(val list: ArrayList<DialogsModel>, val activity: MainActivity, val context: Context) : RecyclerView.Adapter<DialogsAdapter.ItemPostHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemPostHolder {
         return ItemPostHolder(
@@ -26,6 +26,16 @@ class DialogsAdapter(private val list: ArrayList<DialogsModel>, val context: Con
     override fun onBindViewHolder(holder: ItemPostHolder, position: Int) {
         val post = list[position]
         holder.bind(post)
+
+        holder.itemView.setOnClickListener {
+            activity.replaceFragment()
+        }
+
+        //hide line under the last item of Recycler
+        if (position == list.size - 1) {
+            val lineDialog: View = holder.itemView.findViewById<View>(R.id.line_dialog)
+            lineDialog.isVisible = false
+        }
     }
 
     class ItemPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -37,6 +47,7 @@ class DialogsAdapter(private val list: ArrayList<DialogsModel>, val context: Con
             textMessage.text = post.textMessage
             date.text = post.date
         }
+
     }
 
 

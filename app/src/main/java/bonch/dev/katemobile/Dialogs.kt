@@ -27,7 +27,7 @@ class Dialogs: Fragment(){
 
 
     private fun initRecyclerDialogs(view: View) {
-        var list: ArrayList<DialogsModel> = arrayListOf()
+        val list: ArrayList<DialogsModel> = arrayListOf()
         for (i in 0..12) {
             list.add(
                 DialogsModel(
@@ -42,6 +42,8 @@ class Dialogs: Fragment(){
         reviewsRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         reviewsRecyclerView.adapter =
-            DialogsAdapter(list, context!!)
+            DialogsAdapter(list, (activity as MainActivity), context!!)
     }
+
+
 }

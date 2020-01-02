@@ -6,39 +6,40 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
-import kotlinx.android.synthetic.main.activity_scrolling.*
-import kotlinx.android.synthetic.main.content_scrolling.*
+import kotlinx.android.synthetic.main.main_activity.*
 
-class ScrollingActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_scrolling)
+        setContentView(R.layout.main_activity)
         setSupportActionBar(toolbar)
 
+        //for correct scrolling in NestedScrolling
         val scrollView = findViewById<View>(R.id.nestedScrolling) as NestedScrollView
         scrollView.isFillViewport = true
 
-        initViewPager()
-
+        supportFragmentManager.beginTransaction()
+            .add(R.id.nestedScrolling, ViewPager(supportFragmentManager))
+            .commit()
     }
 
 
-    private fun initViewPager() {
-        val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
-        viewPagerAdapter.addFragment(Profile(), "PROFILE")
-        viewPagerAdapter.addFragment(News(), "NEWS")
-        viewPagerAdapter.addFragment(Dialogs(), "MESSAGES")
-        viewPager.adapter = viewPagerAdapter
-        tabs.setupWithViewPager(viewPager)
+    fun replaceFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.nestedScrolling, ShowDialog())
+            .addToBackStack(null)
+            .commit()
     }
 
 
+    //activate Menu button
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_scrolling, menu)
         return true
     }
 
+    //for work with items in Menu
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.settings -> true
