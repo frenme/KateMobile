@@ -37,7 +37,7 @@ class Profile : Fragment() {
     }
 
 
-    private fun initProfileMenu(view: View){
+    private fun initProfileMenu(view: View) {
         userName = view.findViewById(R.id.userName)
 
         friendsBtn = view.findViewById(R.id.friends)
@@ -53,7 +53,7 @@ class Profile : Fragment() {
     }
 
 
-    private fun setListeners(){
+    private fun setListeners() {
         userName.setOnClickListener {
 
         }

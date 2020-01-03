@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         scrollView.isFillViewport = true
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.nestedScrolling, ViewPager(supportFragmentManager))
+            .add(R.id.nestedScrolling, ViewPager())
             .commit()
     }
 

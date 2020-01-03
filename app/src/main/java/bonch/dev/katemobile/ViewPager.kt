@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 
-class ViewPager(private val supportFragmentManager: FragmentManager) : Fragment() {
+class ViewPager : Fragment() {
 
 
     override fun onCreateView(
@@ -19,7 +18,6 @@ class ViewPager(private val supportFragmentManager: FragmentManager) : Fragment(
     ): View? {
         val view: View =
             inflater.inflate(R.layout.view_pager_fragment, container, false)!!
-
         initViewPager(view)
 
         return view
@@ -27,7 +25,7 @@ class ViewPager(private val supportFragmentManager: FragmentManager) : Fragment(
 
 
     private fun initViewPager(view: View) {
-        val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        val viewPagerAdapter = ViewPagerAdapter(childFragmentManager)
         viewPagerAdapter.addFragment(Profile(), "PROFILE")
         viewPagerAdapter.addFragment(News(), "NEWS")
         viewPagerAdapter.addFragment(Dialogs(), "MESSAGES")
