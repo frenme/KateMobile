@@ -7,28 +7,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
+        android:orientation="horizontal">
+
 
         <TextView
             android:id="@+id/userName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Егор Щукин"
-            android:textColor="#262626"
-            android:textSize="18sp" />
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="end">
+            android:background="?attr/selectableItemBackground"
+            android:padding="10dp"
+            android:text="Егор Щукин"
+            android:textColor="#262626"
+            android:textSize="18sp"
+            android:layout_weight="1"/>
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00ffffff"
-                android:src="@drawable/ic_phone" />
-        </LinearLayout>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00ffffff"
+            android:padding="10dp"
+            android:src="@drawable/ic_phone" />
 
 
     </LinearLayout>
@@ -50,11 +49,11 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:drawableStart="@drawable/ic_person"
-            android:textSize="18sp"
             android:drawablePadding="25dp"
             android:padding="10dp"
             android:text="@string/friends"
-            android:textColor="#262626" />
+            android:textColor="#262626"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/wall"
@@ -62,11 +61,11 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:drawableStart="@drawable/ic_wall"
-            android:textSize="18sp"
             android:drawablePadding="25dp"
             android:padding="10dp"
             android:text="@string/wall"
-            android:textColor="#262626" />
+            android:textColor="#262626"
+            android:textSize="18sp" />
 
 
         <TextView
@@ -75,11 +74,11 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:drawableStart="@drawable/ic_people"
-            android:textSize="18sp"
             android:drawablePadding="25dp"
             android:padding="10dp"
             android:text="@string/groups"
-            android:textColor="#262626" />
+            android:textColor="#262626"
+            android:textSize="18sp" />
 
 
         <TextView
@@ -88,11 +87,11 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:drawableStart="@drawable/ic_photo"
-            android:textSize="18sp"
             android:drawablePadding="25dp"
             android:padding="10dp"
             android:text="@string/photos"
-            android:textColor="#262626" />
+            android:textColor="#262626"
+            android:textSize="18sp" />
 
 
         <TextView
@@ -101,11 +100,11 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:drawableStart="@drawable/ic_music"
-            android:textSize="18sp"
             android:drawablePadding="25dp"
             android:padding="10dp"
             android:text="@string/audio"
-            android:textColor="#262626" />
+            android:textColor="#262626"
+            android:textSize="18sp" />
 
 
         <TextView
@@ -114,11 +113,11 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:drawableStart="@drawable/ic_video"
-            android:textSize="18sp"
             android:drawablePadding="25dp"
             android:padding="10dp"
             android:text="@string/video"
-            android:textColor="#262626" />
+            android:textColor="#262626"
+            android:textSize="18sp" />
 
 
         <TextView
@@ -127,11 +126,11 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:drawableStart="@drawable/ic_star"
-            android:textSize="18sp"
             android:drawablePadding="25dp"
             android:padding="10dp"
             android:text="@string/bookmarks"
-            android:textColor="#262626" />
+            android:textColor="#262626"
+            android:textSize="18sp" />
 
 
         <TextView
@@ -140,11 +139,11 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:drawableStart="@drawable/ic_chat"
-            android:textSize="18sp"
             android:drawablePadding="25dp"
             android:padding="10dp"
             android:text="@string/replies"
-            android:textColor="#262626" />
+            android:textColor="#262626"
+            android:textSize="18sp" />
 
 
         <TextView
@@ -153,11 +152,11 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:drawableStart="@drawable/ic_stories"
-            android:textSize="18sp"
             android:drawablePadding="25dp"
             android:padding="10dp"
             android:text="@string/stories"
-            android:textColor="#262626" />
+            android:textColor="#262626"
+            android:textSize="18sp" />
 
 
         <TextView
@@ -166,11 +165,11 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:drawableStart="@drawable/ic_mini_person"
-            android:textSize="18sp"
             android:drawablePadding="25dp"
             android:padding="10dp"
             android:text="@string/full_profile"
-            android:textColor="#262626" />
+            android:textColor="#262626"
+            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>

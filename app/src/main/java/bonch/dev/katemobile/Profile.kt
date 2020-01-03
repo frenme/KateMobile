@@ -6,10 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 
 class Profile : Fragment() {
+
+    private lateinit var userName: TextView
+
+    private lateinit var friendsBtn: TextView
+    private lateinit var wallBtn: TextView
+    private lateinit var groupsBtn: TextView
+    private lateinit var photosBtn: TextView
+    private lateinit var audioBtn: TextView
+    private lateinit var videoBtn: TextView
+    private lateinit var bookmarksBtn: TextView
+    private lateinit var repliesBtn: TextView
+    private lateinit var storiesBtn: TextView
+    private lateinit var fullProfileBtn: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -17,18 +30,63 @@ class Profile : Fragment() {
     ): View? {
         val view: View =
             inflater.inflate(R.layout.profile_fragment, container, false)!!
-        val friends: TextView = view.findViewById(R.id.friends)
-        val stories: TextView = view.findViewById(R.id.stories)
 
-        friends.setOnClickListener {
-            Toast.makeText(context, "AAAAA", Toast.LENGTH_LONG).show()
-        }
-
-        stories.setOnClickListener {
-            Toast.makeText(context, "BBBBBBB", Toast.LENGTH_LONG).show()
-        }
-
-
+        initProfileMenu(view)
+        setListeners()
         return view
+    }
+
+
+    private fun initProfileMenu(view: View){
+        userName = view.findViewById(R.id.userName)
+
+        friendsBtn = view.findViewById(R.id.friends)
+        wallBtn = view.findViewById(R.id.wall)
+        groupsBtn = view.findViewById(R.id.groups)
+        photosBtn = view.findViewById(R.id.photos)
+        audioBtn = view.findViewById(R.id.audio)
+        videoBtn = view.findViewById(R.id.video)
+        bookmarksBtn = view.findViewById(R.id.bookmarks)
+        repliesBtn = view.findViewById(R.id.replies)
+        storiesBtn = view.findViewById(R.id.stories)
+        fullProfileBtn = view.findViewById(R.id.fullProfile)
+    }
+
+
+    private fun setListeners(){
+        userName.setOnClickListener {
+
+        }
+
+        friendsBtn.setOnClickListener {
+            //todo
+        }
+        wallBtn.setOnClickListener {
+            //todo
+        }
+        groupsBtn.setOnClickListener {
+            //todo
+        }
+        photosBtn.setOnClickListener {
+            //todo
+        }
+        audioBtn.setOnClickListener {
+            //todo
+        }
+        videoBtn.setOnClickListener {
+            //todo
+        }
+        bookmarksBtn.setOnClickListener {
+            //todo
+        }
+        repliesBtn.setOnClickListener {
+            //todo
+        }
+        storiesBtn.setOnClickListener {
+            //todo
+        }
+        fullProfileBtn.setOnClickListener {
+            //todo
+        }
     }
 }
