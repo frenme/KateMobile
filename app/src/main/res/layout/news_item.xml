@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
+        android:gravity="center"
         android:orientation="vertical">
 
 
@@ -65,18 +66,72 @@
                 android:id="@+id/title_post"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:text="А патаму что так нада!"
                 android:textColor="#262626"
                 android:textSize="15sp" />
 
 
             <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:adjustViewBounds="true"
+                android:maxHeight="400dp"
+                android:src="@drawable/ava" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:scaleType="fitStart"
-                android:src="@drawable/ava" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_eye"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:text="141" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#00ffffff"
+                        android:drawableStart="@drawable/ic_comment"
+                        android:drawablePadding="5dp"
+                        android:padding="10dp"
+                        android:text="5" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#00ffffff"
+                        android:drawableStart="@drawable/ic_share"
+                        android:drawablePadding="5dp"
+                        android:padding="10dp"
+                        android:text="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#00ffffff"
+                        android:drawableStart="@drawable/ic_like"
+                        android:drawablePadding="5dp"
+                        android:padding="10dp"
+                        android:text="129" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
