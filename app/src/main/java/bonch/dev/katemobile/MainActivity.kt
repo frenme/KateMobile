@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         scrollView.isFillViewport = true
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.nestedScrolling, ViewPager())
+            .add(R.id.nestedScrolling, FullProfile())
             .commit()
     }
 
@@ -31,6 +31,19 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
     }
+
+
+
+
+
+    fun replaceFragment1() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.nestedScrolling, FullProfile())
+            .addToBackStack(null)
+            .commit()
+    }
+
+
 
 
     //activate Menu button

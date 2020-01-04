@@ -22,4 +22,9 @@
     <string name="stories">Stories</string>
     <string name="full_profile">Full Profile</string>
     <string name="enter_answer">Enter answer</string>
+    <string name="all_photos">All photos</string>
+    <string name="photos_with_user">Photos with user</string>
+    <string name="documents">Documents</string>
+    <string name="notes">Notes</string>
+    <string name="gifts">Gifts</string>
 </resources>

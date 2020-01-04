@@ -55,7 +55,7 @@ class Profile : Fragment() {
 
     private fun setListeners() {
         userName.setOnClickListener {
-
+            (activity as MainActivity).replaceFragment1()
         }
 
         friendsBtn.setOnClickListener {

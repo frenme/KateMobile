@@ -24,8 +24,7 @@ class ShowDialog : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View =
-            inflater.inflate(R.layout.show_dialog_fragment, container, false)!!
+        val view: View = inflater.inflate(R.layout.show_dialog_fragment, container, false)
 
         initialize(view)
         setListeners()
@@ -65,6 +64,7 @@ class ShowDialog : Fragment() {
         messagesRecycler.adapter = MessagesAdapter(messagesList)
     }
 
+
     private fun addMessage(message: String, date: String, isMyMessage: Boolean) {
         messagesList.add(MessageModel(message, date, isMyMessage))
     }
@@ -82,6 +82,7 @@ class ShowDialog : Fragment() {
         return dataMessages
 
     }
+
 
     private fun scrollBottom() {
         messagesRecycler.scrollToPosition(messagesList.count() - 1)

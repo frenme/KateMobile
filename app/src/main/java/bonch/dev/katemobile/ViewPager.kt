@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 
-class ViewPager : Fragment() {
+class ViewPager() : Fragment() {
 
 
     override fun onCreateView(
