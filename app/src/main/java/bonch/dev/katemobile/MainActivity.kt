@@ -43,6 +43,13 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+    fun replaceFragment2() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.nestedScrolling, Groups())
+            .addToBackStack(null)
+            .commit()
+    }
+
 
 
 

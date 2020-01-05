@@ -65,7 +65,7 @@ class Profile : Fragment() {
             //todo
         }
         groupsBtn.setOnClickListener {
-            //todo
+            (activity as MainActivity).replaceFragment2()
         }
         photosBtn.setOnClickListener {
             //todo
