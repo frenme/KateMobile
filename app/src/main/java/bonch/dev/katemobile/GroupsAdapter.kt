@@ -4,13 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DefaultItemAnimator
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
 class GroupsAdapter(val list: ArrayList<String>, val context: Context) :
     RecyclerView.Adapter<GroupsAdapter.ItemPostHolder>() {
+
+    private lateinit var clickPosition: ClickPosition
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemPostHolder {
         return ItemPostHolder(
@@ -20,19 +22,19 @@ class GroupsAdapter(val list: ArrayList<String>, val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ItemPostHolder, position: Int) {
+        val layoutManager: LinearLayoutManager
         val listData = arrayListOf<String>()
 
-        //init Second adapter
-        val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        holder.recyclerView.layoutManager = mLayoutManager
-        holder.recyclerView.itemAnimator = DefaultItemAnimator()
 
+        //add 10 elements for show
         for (i in 0..10) {
-            listData.add("Hello, World!")
+            listData.add("")
         }
 
-
-        holder.groupsSecondAdapter = GroupsSecondAdapter(listData, context)
+        //init Second adapter
+        layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        holder.recyclerView.layoutManager = layoutManager
+        holder.groupsSecondAdapter = GroupsSecondAdapter(listData, context, clickPosition)
         holder.recyclerView.adapter = holder.groupsSecondAdapter
     }
 
@@ -42,8 +44,18 @@ class GroupsAdapter(val list: ArrayList<String>, val context: Context) :
     }
 
 
-    class ItemPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ItemPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         lateinit var groupsSecondAdapter: GroupsSecondAdapter
         var recyclerView: RecyclerView = itemView.findViewById(R.id.groupsRecyclerSecond)
+
+        //for clickable
+        init {
+            clickPosition = object : ClickPosition {
+                override fun getPosition(position: Int) {
+                    Toast.makeText(context, "$position", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
     }
 }

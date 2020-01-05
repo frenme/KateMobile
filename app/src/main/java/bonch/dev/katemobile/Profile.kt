@@ -74,7 +74,7 @@ class Profile : Fragment() {
             //todo
         }
         videoBtn.setOnClickListener {
-            //todo
+            (activity as MainActivity).replaceFragment3()
         }
         bookmarksBtn.setOnClickListener {
             //todo

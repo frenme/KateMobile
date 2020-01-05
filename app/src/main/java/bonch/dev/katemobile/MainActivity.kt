@@ -50,6 +50,13 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+    fun replaceFragment3() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.nestedScrolling, Video())
+            .addToBackStack(null)
+            .commit()
+    }
+
 
 
 

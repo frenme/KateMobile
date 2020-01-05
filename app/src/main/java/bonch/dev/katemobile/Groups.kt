@@ -29,7 +29,7 @@ class Groups : Fragment() {
         val list: ArrayList<String> = arrayListOf()
         for (i in 0..12) {
             list.add(
-                ""
+                "Hello, World!"
             )
         }
 

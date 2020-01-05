@@ -4,11 +4,17 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 
 
-class GroupsSecondAdapter(val list: ArrayList<String>, val context: Context) :
+class GroupsSecondAdapter(
+    val list: ArrayList<String>,
+    val context: Context,
+    var clickPosition: ClickPosition
+) :
     RecyclerView.Adapter<GroupsSecondAdapter.ItemPostHolder>() {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemPostHolder {
         return ItemPostHolder(
@@ -22,8 +28,14 @@ class GroupsSecondAdapter(val list: ArrayList<String>, val context: Context) :
     }
 
 
-    override fun onBindViewHolder(holder: ItemPostHolder, position: Int) {}
+    override fun onBindViewHolder(holder: ItemPostHolder, position: Int) {
+        holder.linearLayout.setOnClickListener {
+            clickPosition.getPosition(position)
+        }
+    }
 
 
-    class ItemPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class ItemPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var linearLayout: LinearLayout = itemView.findViewById(R.id.linearLayoutGroup)
+    }
 }
