@@ -20,31 +20,19 @@ class GroupsAdapter(val list: ArrayList<String>, val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ItemPostHolder, position: Int) {
+        val listData = arrayListOf<String>()
 
-
-        val list2 = arrayListOf<String>()
-
+        //init Second adapter
         val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         holder.recyclerView.layoutManager = mLayoutManager
         holder.recyclerView.itemAnimator = DefaultItemAnimator()
 
         for (i in 0..10) {
-            list2.add("FOOOLEG222222")
+            listData.add("Hello, World!")
         }
 
 
-//        holder.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                val firstVisiblePosition = mLayoutManager.findFirstVisibleItemPosition()
-//                if (firstVisiblePosition >= 0)
-//                    holder.monthName.setText(listCal.get(firstVisiblePosition + 3).getMonth())
-//            }
-//        })
-
-        holder.recyclerView.setOnClickListener(View.OnClickListener { })
-
-
-        holder.groupsSecondAdapter = GroupsSecondAdapter(list2, context)
+        holder.groupsSecondAdapter = GroupsSecondAdapter(listData, context)
         holder.recyclerView.adapter = holder.groupsSecondAdapter
     }
 
@@ -56,16 +44,6 @@ class GroupsAdapter(val list: ArrayList<String>, val context: Context) :
 
     class ItemPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         lateinit var groupsSecondAdapter: GroupsSecondAdapter
-        var recyclerView: RecyclerView = itemView.findViewById(R.id.groupsRecycler2)
-
-        //        private val nameDialog = itemView.findViewById<TextView>(R.id.name_dialog)
-//        private val textMessage = itemView.findViewById<TextView>(R.id.text_messages)
-//        private val date = itemView.findViewById<TextView>(R.id.date)
-//        fun bind(post: DialogsModel) {
-//            nameDialog.text = post.nameDialog
-//            textMessage.text = post.textMessage
-//            date.text = post.date
-//        }
-
+        var recyclerView: RecyclerView = itemView.findViewById(R.id.groupsRecyclerSecond)
     }
 }

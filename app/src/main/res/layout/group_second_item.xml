@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="0dp"
+    android:orientation="vertical"
+    app:cardBackgroundColor="#E5E5E5"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/bonch" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/name_dialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#262626"
+                    android:text="Bonch.Dev Mobile"
+                    android:textSize="17sp" />
+
+
+
+                <TextView
+                    android:id="@+id/text_messages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:text="Public page"
+                    android:maxLines="2" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <View
+            android:id="@+id/line_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#80BFBFBF" />
+    </LinearLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>
+
+
+
+
