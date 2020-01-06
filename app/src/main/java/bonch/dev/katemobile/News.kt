@@ -1,46 +1,99 @@
 package bonch.dev.katemobile
 
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import retrofit2.Response
 
 class News: Fragment(){
 
-    private lateinit var reviewsRecyclerView: RecyclerView
+    private val API_KEY = "2538d74de2a040b28dfb0b3f7bc5947c"
+    private lateinit var newsRecyclerView: RecyclerView
+    private lateinit var searchEditText: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View =
-            inflater.inflate(R.layout.news_fragment, container, false)!!
-        initRecyclerNews(view)
+        val view: View = inflater.inflate(R.layout.news_fragment, container, false)
+
+        initViews(view)
+        setListener()
+        //set default query news recycler
+        sendRequest("USA")
+
         return view
     }
 
 
-    private fun initRecyclerNews(view: View) {
-        val list: ArrayList<NewsModel> = arrayListOf()
-        for (i in 0..12) {
-            list.add(
-                NewsModel(
-                    "Егор Щукин",
-                    "Привет, как дела? Привет, как дела? Привет, как дела? Привет, как дела? Привет, как дела? Привет, как дела? Привет, как дела?",
-                    "01 Jan"
-                )
-            )
-        }
+    private fun sendRequest(query: String) {
+        var response: Response<NewsModel>
+        val service = RetrofitFactory.makeRetrofitService()
+        var list: List<ArticlesModel>
 
-        reviewsRecyclerView = view.findViewById(R.id.newsRecycler)
-        reviewsRecyclerView.layoutManager =
+        CoroutineScope(Dispatchers.IO).launch {
+            response = service.getData(query, API_KEY)
+            try {
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        //get list data and init recycler
+                        list = response.body()!!.articles
+                        initRecyclerNews(list)
+                    } else {
+                        Toast.makeText(context, "${response.code()}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } catch (err: HttpException) {
+                Log.e("Retrofit", "${err.printStackTrace()}")
+            }
+        }
+    }
+
+
+    private fun initRecyclerNews(list: List<ArticlesModel>) {
+        newsRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        reviewsRecyclerView.adapter =
+        newsRecyclerView.adapter =
             NewsAdapter(list,  context!!)
+    }
+
+
+    private fun setListener(){
+        //listener tap on key "Enter"
+        searchEditText.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                val textQuery = searchEditText.text.toString().trim().toLowerCase()
+                sendRequest(textQuery)
+
+                val imm = v.context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(v.windowToken, 0)
+                return@OnEditorActionListener true
+            }
+            false
+        })
+    }
+
+
+    private fun initViews(view:View){
+        newsRecyclerView = view.findViewById(R.id.newsRecycler)
+        searchEditText = view.findViewById(R.id.searchEditText)
     }
 }

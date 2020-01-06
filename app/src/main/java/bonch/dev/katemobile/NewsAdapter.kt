@@ -4,10 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 
-class NewsAdapter(val list: ArrayList<NewsModel>, val context: Context) : RecyclerView.Adapter<NewsAdapter.ItemPostHolder>() {
+class NewsAdapter(val list: List<ArticlesModel>, val context: Context) : RecyclerView.Adapter<NewsAdapter.ItemPostHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemPostHolder {
         return ItemPostHolder(
@@ -16,26 +19,29 @@ class NewsAdapter(val list: ArrayList<NewsModel>, val context: Context) : Recycl
         )
     }
 
+
     override fun getItemCount(): Int {
         return list.size
     }
 
+
     override fun onBindViewHolder(holder: ItemPostHolder, position: Int) {
         val post = list[position]
-        //holder.bind(post)
-
-
+        holder.bind(post)
     }
 
-    class ItemPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        private val nameDialog = itemView.findViewById<TextView>(R.id.name_dialog)
-//        private val textMessage = itemView.findViewById<TextView>(R.id.text_messages)
-//        private val date = itemView.findViewById<TextView>(R.id.date)
-//        fun bind(post: DialogsModel) {
-//            nameDialog.text = post.nameDialog
-//            textMessage.text = post.textMessage
-//            date.text = post.date
-//        }
+
+    inner class ItemPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val titleNews = itemView.findViewById<TextView>(R.id.titleNews)
+        private val imgNews = itemView.findViewById<ImageView>(R.id.imgNews)
+        fun bind(post: ArticlesModel) {
+            titleNews.text = post.title
+
+            Glide.with(context)
+                .load(post.urlToImage)
+                .override(1000, 1000)
+                .into(imgNews)
+        }
 
     }
 
