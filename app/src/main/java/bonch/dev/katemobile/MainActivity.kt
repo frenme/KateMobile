@@ -1,5 +1,7 @@
 package bonch.dev.katemobile
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -57,7 +59,15 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-
+    //check Internet connection (sorry for Deprecation, I did not find an actual way to check Internet...)
+    companion object {
+        @Suppress("DEPRECATION")
+        fun isInternet(context: Context): Boolean {
+            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val networkInfo = connectivityManager.activeNetworkInfo
+            return networkInfo != null && networkInfo.isConnected
+        }
+    }
 
 
     //activate Menu button
