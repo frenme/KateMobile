@@ -1,4 +1,4 @@
-package bonch.dev.katemobile
+package bonch.dev.katemobile.adapters
 
 
 import android.content.Context
@@ -8,9 +8,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import bonch.dev.katemobile.R
+import bonch.dev.katemobile.pojo.Dialog
+import bonch.dev.katemobile.presenter.IDialogsPresenter
 
 
-class DialogsAdapter(val list: ArrayList<DialogsModel>, val activity: MainActivity, val context: Context) : RecyclerView.Adapter<DialogsAdapter.ItemPostHolder>() {
+class DialogsAdapter(
+    val list: ArrayList<Dialog>,
+    val iDialogsPresenter: IDialogsPresenter,
+    val context: Context
+) : RecyclerView.Adapter<DialogsAdapter.ItemPostHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemPostHolder {
         return ItemPostHolder(
@@ -19,16 +26,18 @@ class DialogsAdapter(val list: ArrayList<DialogsModel>, val activity: MainActivi
         )
     }
 
+
     override fun getItemCount(): Int {
         return list.size
     }
+
 
     override fun onBindViewHolder(holder: ItemPostHolder, position: Int) {
         val post = list[position]
         holder.bind(post)
 
         holder.itemView.setOnClickListener {
-            activity.replaceFragment()
+            iDialogsPresenter.clickDialog(position)
         }
 
         //hide line under the last item of Recycler
@@ -38,13 +47,14 @@ class DialogsAdapter(val list: ArrayList<DialogsModel>, val activity: MainActivi
         }
     }
 
+
     class ItemPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val nameDialog = itemView.findViewById<TextView>(R.id.name_dialog)
         private val textMessage = itemView.findViewById<TextView>(R.id.text_messages)
         private val date = itemView.findViewById<TextView>(R.id.date)
-        fun bind(post: DialogsModel) {
-            nameDialog.text = post.nameDialog
-            textMessage.text = post.textMessage
+        fun bind(post: Dialog) {
+            nameDialog.text = post.name
+            textMessage.text = post.message
             date.text = post.date
         }
 

@@ -1,4 +1,4 @@
-package bonch.dev.katemobile
+package bonch.dev.katemobile.view
 
 
 import android.os.Bundle
@@ -7,11 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import bonch.dev.katemobile.Constants.Companion.FULL_PROFILE
+import bonch.dev.katemobile.Constants.Companion.GROUPS
+import bonch.dev.katemobile.Constants.Companion.VIDEOS
+import bonch.dev.katemobile.R
+import bonch.dev.katemobile.presenter.IProfilePresenter
+import bonch.dev.katemobile.presenter.ProfilePresenter
 
-class Profile : Fragment() {
+class ProfileView : Fragment(), IProfileView {
 
+    private var iProfilePresenter: IProfilePresenter? = null
     private lateinit var userName: TextView
-
     private lateinit var friendsBtn: TextView
     private lateinit var wallBtn: TextView
     private lateinit var groupsBtn: TextView
@@ -29,7 +35,11 @@ class Profile : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View =
-            inflater.inflate(R.layout.profile_fragment, container, false)!!
+            inflater.inflate(R.layout.profile_fragment, container, false)
+
+        if (iProfilePresenter == null) {
+            iProfilePresenter = ProfilePresenter(this)
+        }
 
         initProfileMenu(view)
         setListeners()
@@ -37,25 +47,10 @@ class Profile : Fragment() {
     }
 
 
-    private fun initProfileMenu(view: View) {
-        userName = view.findViewById(R.id.userName)
-
-        friendsBtn = view.findViewById(R.id.friends)
-        wallBtn = view.findViewById(R.id.wall)
-        groupsBtn = view.findViewById(R.id.groups)
-        photosBtn = view.findViewById(R.id.photos)
-        audioBtn = view.findViewById(R.id.audio)
-        videoBtn = view.findViewById(R.id.video)
-        bookmarksBtn = view.findViewById(R.id.bookmarks)
-        repliesBtn = view.findViewById(R.id.replies)
-        storiesBtn = view.findViewById(R.id.stories)
-        fullProfileBtn = view.findViewById(R.id.fullProfile)
-    }
-
-
-    private fun setListeners() {
+    override fun setListeners() {
+        //notify presenter if click item
         userName.setOnClickListener {
-            (activity as MainActivity).replaceFragment1()
+            iProfilePresenter!!.clickProfileMenu(FULL_PROFILE)
         }
 
         friendsBtn.setOnClickListener {
@@ -65,7 +60,7 @@ class Profile : Fragment() {
             //todo
         }
         groupsBtn.setOnClickListener {
-            (activity as MainActivity).replaceFragment2()
+            iProfilePresenter!!.clickProfileMenu(GROUPS)
         }
         photosBtn.setOnClickListener {
             //todo
@@ -74,7 +69,7 @@ class Profile : Fragment() {
             //todo
         }
         videoBtn.setOnClickListener {
-            (activity as MainActivity).replaceFragment3()
+            iProfilePresenter!!.clickProfileMenu(VIDEOS)
         }
         bookmarksBtn.setOnClickListener {
             //todo
@@ -86,7 +81,22 @@ class Profile : Fragment() {
             //todo
         }
         fullProfileBtn.setOnClickListener {
-            //todo
+            iProfilePresenter!!.clickProfileMenu(FULL_PROFILE)
         }
+    }
+
+
+    override fun initProfileMenu(view: View) {
+        userName = view.findViewById(R.id.userName)
+        friendsBtn = view.findViewById(R.id.friends)
+        wallBtn = view.findViewById(R.id.wall)
+        groupsBtn = view.findViewById(R.id.groups)
+        photosBtn = view.findViewById(R.id.photos)
+        audioBtn = view.findViewById(R.id.audio)
+        videoBtn = view.findViewById(R.id.video)
+        bookmarksBtn = view.findViewById(R.id.bookmarks)
+        repliesBtn = view.findViewById(R.id.replies)
+        storiesBtn = view.findViewById(R.id.stories)
+        fullProfileBtn = view.findViewById(R.id.fullProfile)
     }
 }

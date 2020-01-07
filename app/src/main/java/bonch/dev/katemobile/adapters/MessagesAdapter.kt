@@ -1,12 +1,14 @@
-package bonch.dev.katemobile
+package bonch.dev.katemobile.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import bonch.dev.katemobile.R
+import bonch.dev.katemobile.pojo.Message
 
-class MessagesAdapter(val messageList: MutableList<MessageModel>) :
+class MessagesAdapter(val messageList: ArrayList<Message>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val OTHER_MESSAGE = 0
@@ -37,7 +39,7 @@ class MessagesAdapter(val messageList: MutableList<MessageModel>) :
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (messageList[position].isMyMessage) {
+        return if (messageList[position].isMyMessage!!) {
             MY_MESSAGE
         } else OTHER_MESSAGE
     }

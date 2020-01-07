@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import bonch.dev.katemobile.view.DialogsView
+import bonch.dev.katemobile.view.ProfileView
 import com.google.android.material.tabs.TabLayout
 
 class ViewPager : Fragment() {
@@ -26,9 +28,9 @@ class ViewPager : Fragment() {
 
     private fun initViewPager(view: View) {
         val viewPagerAdapter = ViewPagerAdapter(childFragmentManager)
-        viewPagerAdapter.addFragment(Profile(), "PROFILE")
+        viewPagerAdapter.addFragment(ProfileView(), "PROFILE")
         viewPagerAdapter.addFragment(News(), "NEWS")
-        viewPagerAdapter.addFragment(Dialogs(), "MESSAGES")
+        viewPagerAdapter.addFragment(DialogsView(), "MESSAGES")
 
         val viewPager = view.findViewById<ViewPager>(R.id.viewPager)
         val tabLayout = view.findViewById<TabLayout>(R.id.tabs)

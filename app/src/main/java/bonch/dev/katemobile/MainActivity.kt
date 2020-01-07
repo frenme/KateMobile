@@ -8,6 +8,11 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
+import bonch.dev.katemobile.Constants.Companion.DIALOG
+import bonch.dev.katemobile.Constants.Companion.FULL_PROFILE
+import bonch.dev.katemobile.Constants.Companion.GROUPS
+import bonch.dev.katemobile.Constants.Companion.VIDEOS
+import bonch.dev.katemobile.view.ShowDialogView
 import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,43 +32,42 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun replaceFragment() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.nestedScrolling, ShowDialog())
-            .addToBackStack(null)
-            .commit()
-    }
+    fun replaceFragment(id: Int) {
+        when (id) {
+            FULL_PROFILE -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.nestedScrolling, FullProfile())
+                    .addToBackStack(null)
+                    .commit()
+            }
+            GROUPS -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.nestedScrolling, Groups())
+                    .addToBackStack(null)
+                    .commit()
+            }
+            VIDEOS -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.nestedScrolling, Video())
+                    .addToBackStack(null)
+                    .commit()
+            }
+            DIALOG -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.nestedScrolling, ShowDialogView())
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }
 
-
-
-
-
-    fun replaceFragment1() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.nestedScrolling, FullProfile())
-            .addToBackStack(null)
-            .commit()
-    }
-
-    fun replaceFragment2() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.nestedScrolling, Groups())
-            .addToBackStack(null)
-            .commit()
-    }
-
-    fun replaceFragment3() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.nestedScrolling, Video())
-            .addToBackStack(null)
-            .commit()
     }
 
     //check Internet connection (sorry for Deprecation, I did not find an actual way to check Internet...)
     companion object {
         @Suppress("DEPRECATION")
         fun isInternet(context: Context): Boolean {
-            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val connectivityManager =
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val networkInfo = connectivityManager.activeNetworkInfo
             return networkInfo != null && networkInfo.isConnected
         }
