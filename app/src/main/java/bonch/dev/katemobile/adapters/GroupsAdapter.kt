@@ -1,18 +1,18 @@
-package bonch.dev.katemobile
+package bonch.dev.katemobile.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import bonch.dev.katemobile.R
+import bonch.dev.katemobile.pojo.Group
 
 
-class GroupsAdapter(val list: ArrayList<String>, val context: Context) :
+class GroupsAdapter(val list: ArrayList<Group>, val context: Context) :
     RecyclerView.Adapter<GroupsAdapter.ItemPostHolder>() {
 
-    private lateinit var clickPosition: ClickPosition
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemPostHolder {
         return ItemPostHolder(
@@ -34,7 +34,8 @@ class GroupsAdapter(val list: ArrayList<String>, val context: Context) :
         //init Second adapter
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         holder.recyclerView.layoutManager = layoutManager
-        holder.groupsSecondAdapter = GroupsSecondAdapter(listData, context, clickPosition)
+        holder.groupsSecondAdapter =
+            GroupsSecondAdapter(listData, context)
         holder.recyclerView.adapter = holder.groupsSecondAdapter
     }
 
@@ -47,15 +48,6 @@ class GroupsAdapter(val list: ArrayList<String>, val context: Context) :
     inner class ItemPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         lateinit var groupsSecondAdapter: GroupsSecondAdapter
         var recyclerView: RecyclerView = itemView.findViewById(R.id.groupsRecyclerSecond)
-
-        //for clickable
-        init {
-            clickPosition = object : ClickPosition {
-                override fun getPosition(position: Int) {
-                    Toast.makeText(context, "$position", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
 
     }
 }

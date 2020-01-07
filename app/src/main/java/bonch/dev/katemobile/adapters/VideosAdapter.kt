@@ -1,19 +1,22 @@
-package bonch.dev.katemobile
+package bonch.dev.katemobile.adapters
 
 import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import bonch.dev.katemobile.R
+import bonch.dev.katemobile.pojo.Video
+import bonch.dev.katemobile.view.IVideosView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.github.luizgrp.sectionedrecyclerviewadapter.Section
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters
 import jp.wasabeef.glide.transformations.BlurTransformation
 
-class VideoAdapter(
-    private val title: String, private val list: ArrayList<String>,
-    private val clickListener: ClickListenerSections, val context: Context
+class VideosAdapter(
+    private val title: String, private val list: ArrayList<Video>,
+    private val iVideosView: IVideosView, val context: Context
 ) : Section(
     SectionParameters.builder()
         .itemResourceId(R.layout.video_item)
@@ -28,7 +31,7 @@ class VideoAdapter(
 
     override fun onBindItemViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val itemHolder = holder as ItemViewHolder
-        itemHolder.titleItem.text = list[position]
+        itemHolder.titleItem.text = list[position].title
 
         Glide.with(context)
             .load(URL_PREVIEW)
@@ -36,7 +39,7 @@ class VideoAdapter(
             .into(itemHolder.imgView)
 
         itemHolder.rootView.setOnClickListener {
-            clickListener.onItemRootViewClicked(
+            iVideosView.onItemRootViewClicked(
                 title,
                 itemHolder.adapterPosition
             )
@@ -54,8 +57,7 @@ class VideoAdapter(
         )
 
         headerHolder.rootView.setOnClickListener {
-            clickListener.onHeaderRootViewClicked(
-                title,
+            iVideosView.onHeaderRootViewClicked(
                 this
             )
         }

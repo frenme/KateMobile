@@ -1,15 +1,15 @@
-package bonch.dev.katemobile
+package bonch.dev.katemobile.pojo
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class NewsModel(
+data class News(
     @SerializedName("articles")
     @Expose
-    val articles: List<ArticlesModel>
+    val articles: List<Articles>
 )
 
-data class ArticlesModel(
+data class Articles(
     @SerializedName("author")
     @Expose
     val author: String,

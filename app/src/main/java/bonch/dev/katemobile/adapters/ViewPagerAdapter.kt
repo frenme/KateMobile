@@ -1,4 +1,4 @@
-package bonch.dev.katemobile
+package bonch.dev.katemobile.adapters
 
 
 import androidx.fragment.app.Fragment

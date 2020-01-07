@@ -57,7 +57,7 @@ class MessagesAdapter(val messageList: ArrayList<Message>) :
         private val date: TextView = view.findViewById(R.id.date)
         fun bind(position: Int) {
             message.text = messageList[position].message
-            date.text = "21:12"
+            date.text = messageList[position].date
         }
 
     }
@@ -67,7 +67,7 @@ class MessagesAdapter(val messageList: ArrayList<Message>) :
         private val date: TextView = view.findViewById(R.id.date)
         fun bind(position: Int) {
             message.text = messageList[position].message
-            date.text = "12:12"
+            date.text = messageList[position].date
         }
 
     }

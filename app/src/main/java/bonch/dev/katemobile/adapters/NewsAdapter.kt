@@ -1,4 +1,4 @@
-package bonch.dev.katemobile
+package bonch.dev.katemobile.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import bonch.dev.katemobile.R
+import bonch.dev.katemobile.pojo.Articles
 import com.bumptech.glide.Glide
 
 
-class NewsAdapter(val list: List<ArticlesModel>, val context: Context) : RecyclerView.Adapter<NewsAdapter.ItemPostHolder>() {
+class NewsAdapter(val list: List<Articles>, val context: Context) : RecyclerView.Adapter<NewsAdapter.ItemPostHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemPostHolder {
         return ItemPostHolder(
@@ -34,7 +36,7 @@ class NewsAdapter(val list: List<ArticlesModel>, val context: Context) : Recycle
     inner class ItemPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val titleNews = itemView.findViewById<TextView>(R.id.titleNews)
         private val imgNews = itemView.findViewById<ImageView>(R.id.imgNews)
-        fun bind(post: ArticlesModel) {
+        fun bind(post: Articles) {
             titleNews.text = post.title
 
             Glide.with(context)

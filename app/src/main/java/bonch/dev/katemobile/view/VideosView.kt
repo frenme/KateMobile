@@ -1,4 +1,4 @@
-package bonch.dev.katemobile
+package bonch.dev.katemobile.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,17 +8,27 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
+import bonch.dev.katemobile.R
+import bonch.dev.katemobile.adapters.VideosAdapter
+import bonch.dev.katemobile.pojo.Video
+import bonch.dev.katemobile.presenter.IVideosPresenter
+import bonch.dev.katemobile.presenter.VideosPresenter
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 
 /**
  * Using the library SectionedRecyclerViewAdapter to work with sectors of RecyclerView
  * */
 
-class Video : Fragment(), ClickListenerSections {
+class VideosView : Fragment(), IVideosView {
 
     //declare View here to use Snacks
     private lateinit var viewFragment: View
+    private val SECTION1 = "Новые видео"
+    private val SECTION2 = "Просмотреть позже"
+    private var iVideosPresenter: IVideosPresenter? = null
+    private lateinit var parentLayout: LinearLayout
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var sectionedAdapter: SectionedRecyclerViewAdapter
 
     override fun onCreateView(
@@ -29,25 +39,30 @@ class Video : Fragment(), ClickListenerSections {
         viewFragment = inflater.inflate(R.layout.video_fragment, container, false)
         sectionedAdapter = SectionedRecyclerViewAdapter()
 
-        val list: ArrayList<String> = arrayListOf()
-        val recyclerView = viewFragment.findViewById<RecyclerView>(R.id.videoRecycler)
-        val gridLayoutManager = GridLayoutManager(context, 2)
-
-
-        for (i in 0..10) {
-            list.add("Some video")
+        if (iVideosPresenter == null) {
+            iVideosPresenter = VideosPresenter(context!!, this)
         }
 
+        initialize()
+        iVideosPresenter!!.loadVideos()
+
+
+        return viewFragment
+    }
+
+
+    override fun initRecyclerVideos(list: ArrayList<Video>) {
+        //init TWO sector in RecyclerView
         sectionedAdapter.addSection(
-            VideoAdapter(
-                "Новые видео",
+            VideosAdapter(
+                SECTION1,
                 list, this, context!!
             )
         )
 
         sectionedAdapter.addSection(
-            VideoAdapter(
-                "Просмотреть позже",
+            VideosAdapter(
+                SECTION2,
                 list, this, context!!
             )
         )
@@ -59,15 +74,21 @@ class Video : Fragment(), ClickListenerSections {
                 } else 1
             }
         }
+
         recyclerView.layoutManager = gridLayoutManager
         recyclerView.adapter = sectionedAdapter
+    }
 
-        return viewFragment
+
+    override fun initialize() {
+        parentLayout = viewFragment.findViewById(R.id.linearLayoutVideo)
+        recyclerView = viewFragment.findViewById(R.id.videoRecycler)
+        gridLayoutManager = GridLayoutManager(context, 2)
     }
 
 
     //with click on Header Section, sector will open/close
-    override fun onHeaderRootViewClicked(sectionTitle: String, section: VideoAdapter) {
+    override fun onHeaderRootViewClicked(section: VideosAdapter) {
         val wasExpanded = section.isExpanded
         val sectionAdapter = sectionedAdapter.getAdapterForSection(section)
         val previousItemsTotal = section.contentItemsTotal
@@ -85,15 +106,10 @@ class Video : Fragment(), ClickListenerSections {
 
     //with click on Item Section, show Snack
     override fun onItemRootViewClicked(sectionTitle: String, itemAdapterPosition: Int) {
-        val parentLayout = viewFragment.findViewById<LinearLayout>(R.id.linearLayoutVideo)
-
-        Snackbar.make(
-            parentLayout, String.format(
-                "Clicked on position #%s of Section %s",
-                sectionedAdapter.getPositionInSection(itemAdapterPosition),
-                sectionTitle
-            ), Snackbar.LENGTH_LONG
-        ).show()
-
+        iVideosPresenter!!.onItemViewClick(
+            parentLayout,
+            sectionedAdapter.getPositionInSection(itemAdapterPosition),
+            sectionTitle
+        )
     }
 }

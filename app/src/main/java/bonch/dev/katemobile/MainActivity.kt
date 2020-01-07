@@ -12,7 +12,7 @@ import bonch.dev.katemobile.Constants.Companion.DIALOG
 import bonch.dev.katemobile.Constants.Companion.FULL_PROFILE
 import bonch.dev.katemobile.Constants.Companion.GROUPS
 import bonch.dev.katemobile.Constants.Companion.VIDEOS
-import bonch.dev.katemobile.view.ShowDialogView
+import bonch.dev.katemobile.view.*
 import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         scrollView.isFillViewport = true
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.nestedScrolling, ViewPager())
+            .add(R.id.nestedScrolling, ViewPagerView())
             .commit()
     }
 
@@ -36,19 +36,19 @@ class MainActivity : AppCompatActivity() {
         when (id) {
             FULL_PROFILE -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.nestedScrolling, FullProfile())
+                    .replace(R.id.nestedScrolling, FullProfileView())
                     .addToBackStack(null)
                     .commit()
             }
             GROUPS -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.nestedScrolling, Groups())
+                    .replace(R.id.nestedScrolling, GroupsView())
                     .addToBackStack(null)
                     .commit()
             }
             VIDEOS -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.nestedScrolling, Video())
+                    .replace(R.id.nestedScrolling, VideosView())
                     .addToBackStack(null)
                     .commit()
             }

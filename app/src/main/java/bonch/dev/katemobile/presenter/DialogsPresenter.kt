@@ -8,10 +8,10 @@ import bonch.dev.katemobile.MainActivity.Companion.isInternet
 import bonch.dev.katemobile.model.DialogsModel
 import bonch.dev.katemobile.model.IDialogsModel
 import bonch.dev.katemobile.pojo.Dialog
-import bonch.dev.katemobile.view.DialogsView
+import bonch.dev.katemobile.view.IDialogsView
 
 
-class DialogsPresenter(val context: Context, val dialogsView: DialogsView, val mainActivity: MainActivity) : IDialogsPresenter {
+class DialogsPresenter(val context: Context, val iDialogsView: IDialogsView, val mainActivity: MainActivity) : IDialogsPresenter {
 
     private var iDialogsModel: IDialogsModel? = null
 
@@ -26,7 +26,7 @@ class DialogsPresenter(val context: Context, val dialogsView: DialogsView, val m
     }
 
     override fun setDialogsRecyclerView(list: ArrayList<Dialog>) {
-        dialogsView.initRecyclerDialogs(list)
+        iDialogsView.initRecyclerDialogs(list)
     }
 
     override fun clickDialog(idDialog: Int) {

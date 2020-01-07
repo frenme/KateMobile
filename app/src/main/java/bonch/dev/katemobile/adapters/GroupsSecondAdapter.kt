@@ -1,17 +1,16 @@
-package bonch.dev.katemobile
+package bonch.dev.katemobile.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
+import bonch.dev.katemobile.R
 
 
 class GroupsSecondAdapter(
     val list: ArrayList<String>,
-    val context: Context,
-    var clickPosition: ClickPosition
+    val context: Context
 ) :
     RecyclerView.Adapter<GroupsSecondAdapter.ItemPostHolder>() {
 
@@ -23,19 +22,14 @@ class GroupsSecondAdapter(
         )
     }
 
+
     override fun getItemCount(): Int {
         return list.size
     }
 
 
-    override fun onBindViewHolder(holder: ItemPostHolder, position: Int) {
-        holder.linearLayout.setOnClickListener {
-            clickPosition.getPosition(position)
-        }
-    }
+    override fun onBindViewHolder(holder: ItemPostHolder, position: Int) {}
 
 
-    class ItemPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var linearLayout: LinearLayout = itemView.findViewById(R.id.linearLayoutGroup)
-    }
+    class ItemPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }
